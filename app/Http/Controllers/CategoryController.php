@@ -30,7 +30,7 @@ class CategoryController extends Controller
         $category->name=$req->name;
         $category->save();
 
-        return redirect('categories_list');
+        return redirect('categories/categories_list');
     }
 
 
@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $category=Category::findOrFail($id);
         $category->name=$req->name;
         $category->save();
-        return redirect('categories_list');
+        return redirect('categories/list');
 
 
     }
@@ -58,7 +58,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::findOrFail($id)->delete();
-        return redirect('categories_list');
+        return redirect('categories/list');
 
     }
 }

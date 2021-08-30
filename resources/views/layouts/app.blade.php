@@ -21,11 +21,11 @@
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Start Bootstrap</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Dashboard</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('create_C')}}">add new category</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">add new post</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('categories_list')}}">categories list</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">posts list</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('home')}}">home page</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('categories.create')}}">add new category</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('create')}}">add new post</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('categories.list')}}">categories list</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{route('list')}}">posts list</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
