@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
    public function index()
    {
-       $posts=Post::all();
+       $posts=Post::where('user_id',Auth::user()->id)->paginate(1);
        return view('posts.index',['posts'=>$posts]);
    }
 
@@ -22,15 +23,18 @@ class PostController extends Controller
 
    public function create()
    {
-       $categories=Category::all();
+       $categories=Category::where('user_id',Auth::user()->id)->get();
        return view('posts.create',['categories'=>$categories]);
    }
    public function store(Request $req)
    {
+     
+
        $post=new Post();
        $post->title=$req->title;
        $post->description=$req->description;
        $post->category_id=$req->category_id;
+       $post->user_id=Auth::user()->id;
        if($req->hasFile('avatar'))
        {
            $path=$req->avatar->store('images');
@@ -51,10 +55,12 @@ class PostController extends Controller
    
    public function update(Request $req,$id)
    {
+       
        $post=Post::find($id);
        $post->title=$req->title;
        $post->description=$req->description;
        $post->category_id=$req->category_id;
+       $post->user_id=Auth::user()->id;
        $post->save();
        return redirect('posts/list');
    }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // category routes
-Route::group(['prefix'=>'categories'],function(){
+Route::group(['prefix'=>'categories','middleware'=>'auth'],function(){
 
 Route::get('create',[CategoryController::class,'create'])->name('categories.create');
 
@@ -44,7 +45,7 @@ Route::put('update/{id}',[CategoryController::class,'update'])->name('categories
 // post routes
 
 
-Route::group(['prefix'=>'posts'],function(){
+Route::group(['middleware'=>'auth','prefix'=>'posts'],function(){
 
     Route::get('create',[PostController::class,'create'])->name('create');
     
@@ -61,8 +62,10 @@ Route::group(['prefix'=>'posts'],function(){
     Route::put('update/{id}',[PostController::class,'update'])->name('update');
 
 
-    Route::get('/',[PostController::class,'home'])->name('home');
-
-    
     
 });
+    Route::get('/',[PostController::class,'home'])->name('home');
+
+
+Auth::routes();
+

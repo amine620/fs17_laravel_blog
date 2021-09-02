@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
 
     public function index()
     {
-        $categories=Category::all();
+        $categories=Category::where('user_id',Auth::user()->id)->paginate(2);
        return view('categories.index',['categories'=>$categories]);
     }
 
@@ -28,6 +29,7 @@ class CategoryController extends Controller
          
         $category=new Category();
         $category->name=$req->name;
+        $category->user_id=Auth::user()->id;
         $category->save();
 
         return redirect('categories/categories_list');
@@ -49,6 +51,7 @@ class CategoryController extends Controller
 
         $category=Category::findOrFail($id);
         $category->name=$req->name;
+        $category->user_id=Auth::user()->id;
         $category->save();
         return redirect('categories/list');
 
