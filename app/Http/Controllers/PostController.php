@@ -61,6 +61,11 @@ class PostController extends Controller
        $post->description=$req->description;
        $post->category_id=$req->category_id;
        $post->user_id=Auth::user()->id;
+       if($req->hasFile('avatar'))
+       {
+           $path=$req->avatar->store('images');
+           $post->photo=$path;
+       }
        $post->save();
        return redirect('posts/list');
    }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -63,9 +64,14 @@ Route::group(['middleware'=>'auth','prefix'=>'posts'],function(){
 
 
     
+    Route::post('storeComment',[CommentController::class,'store'])->name('storeComment');
+    Route::delete('deleteComment/{id}',[CommentController::class,'destroy'])->name('deleteComment');
 });
-    Route::get('/',[PostController::class,'home'])->name('home');
 
+
+    Route::get('/',[PostController::class,'home'])->name('home');
+    Route::get('commentPage/{id}',[CommentController::class,'commentPage'])->name('commentPage');
+    
 
 Auth::routes();
 
